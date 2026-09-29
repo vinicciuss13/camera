@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {View, Text, Stylesheet, TouchableOpacity, 
+        PermissionsAndroid, Alert, ActivityIndicator} from 'react-native'; 
+
+import {useState, useRef} from 'react';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import {CameraView, useCameraPermissions} from 'expo-camera';
+import {Assets, usePermissions} from 'expo-media-library';
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+     
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function TelaCamera (){
+  const [PermissaoCamera, setPermissaoCamera] = useCameraPermissions();
+  const [PermissaoGaleria, setPermissaoGaleria] = usePermissions({writeOnly: true});
+  const [Salvando, setSalvando] = useState(false);
+  const camera = useRef(null);
+
+  if(!PermissaoCamera && !PermissaoGaleria){
+    return null;
+  }
+
+  const TemPermissao = PermissaoCamera.granted && PermissaoGaleria.granted 
+}
